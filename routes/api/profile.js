@@ -103,6 +103,7 @@ async (req, res) => {
 router.get('/', async (req, res) => {
     try{
         profiles = await Profile.find().populate('user', ['avatar', 'name'])
+        console.log(profiles)
         res.json(profiles)
     } catch(err){
         res.status(500).json({ msg: err.message })

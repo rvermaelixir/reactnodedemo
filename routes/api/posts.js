@@ -174,7 +174,7 @@ router.delete("/:post_id/comments/:comment_id",
         try {
             let post = await Post.findById(req.params.post_id)
             if(!post) return res.status(401).json({ msg: "Post dont exist" })
-            
+            if(post.user._id.toString() != req.user.id) return res.status(400).json({ msg: "User Not Authorized" })
             const updatedComments = await post.comments.filter((comment) => req.params.comment_id != comment._id.toString())
     
             post = await Post.findOneAndUpdate(

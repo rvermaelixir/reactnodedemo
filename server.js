@@ -3,6 +3,7 @@ const connectDB = require('./config/db')
 const app = express()
 const PORT = process.env.port || 8001
 connectDB()
+const cors = require('cors');
 
 // init middlewares
 app.use(express.json({extended: false}))
@@ -10,7 +11,9 @@ app.use(express.json({extended: false}))
 app.get("/", (req, res) => {
     res.send("Welcome to home page")
 })
-
+app.use(cors({
+    origin: '*'
+}));
 // define routes
 app.use('/api/users', require('./routes/api/users'))
 app.use('/api/profile', require('./routes/api/profile'))
