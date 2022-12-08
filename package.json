@@ -12,6 +12,7 @@
   "author": "Ravi",
   "license": "MIT",
   "dependencies": {
+    "@reduxjs/toolkit": "^1.9.1",
     "bcryptjs": "^2.4.3",
     "config": "^3.3.8",
     "cors": "^2.8.5",
