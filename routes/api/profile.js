@@ -3,6 +3,7 @@ const auth = require('../../middleware/auth')
 const router = express.Router()
 const Profile = require('../../models/Profile')
 const User = require('../../models/User')
+const Post = require('../../models/Post')
 const { validationResult, check } = require('express-validator');
 const profile = require('../../models/Profile')
 const config = require('config')
@@ -11,10 +12,10 @@ const request = require('request')
 // @desc   "fetch current user profile"
 // @access "private"
 router.get("/me", auth, async (req, res) => {
-    try{
+    try{     
         const profile = await Profile.findOne({user: req.user.id}).populate('user', ['name', 'avatar'])
         if(!profile){
-            res.status(400).json({msg: "No profile found for the user"})
+            return res.status(400).json({msg: "No profile found for the user"})
         }
         res.send(profile)
     } catch (err) {
@@ -32,7 +33,7 @@ router.post("/",
     auth,
     [
         check('status', 'Status is required').not().isEmpty(),
-        check('skills', 'Skills are required as array of strings').not().isEmpty()
+        check('skills', 'Skills are required').not().isEmpty()
     ]
 ], 
 async (req, res) => {
@@ -103,7 +104,6 @@ async (req, res) => {
 router.get('/', async (req, res) => {
     try{
         profiles = await Profile.find().populate('user', ['avatar', 'name'])
-        console.log(profiles)
         res.json(profiles)
     } catch(err){
         res.status(500).json({ msg: err.message })
@@ -116,10 +116,11 @@ router.get('/', async (req, res) => {
 router.get('/user/:user_id', async (req, res) => {
     try{
         const profile = await Profile.findOne({ user: req.params.user_id}).populate('user', ['avatar', 'name'])
+        
         if(!profile){
             return res.status(400).json({ msg: "Profile Not Found" })
         }
-        res.json(profiles)
+        res.json(profile)
     } catch(err){
         res.status(500).json({ msg: err.message })
     }
@@ -131,6 +132,7 @@ router.get('/user/:user_id', async (req, res) => {
 router.delete('/', auth, async (req, res) => {
     try{
         // Remove Profile for a user
+        await Post.find
         await Profile.findOneAndRemove({ user: req.user.id})
         await User.findOneAndRemove({ _id: req.user.id})
         

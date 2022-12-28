@@ -7,9 +7,10 @@ const config = require('config')
  
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+
 // @route  "GET /api/comments"
 // @desc   "fetch all users"
-// @access "public"
+// @access "private route"
 router.get("/", auth, async (req, res) => {
     try {
         const user =  await User.findById(req.user.id).select('-password')

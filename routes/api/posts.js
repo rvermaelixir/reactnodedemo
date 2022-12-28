@@ -54,7 +54,6 @@ router.get("/:post_id", async (req, res) => {
 // @desc "Delete a specific post with all comments and likes"
 // @access "Private"
 router.delete("/:post_id", auth, async (req, res) => {
-    console.log({_id: req.params.post_id, user: req.user.id})
     try {
         const post = await Post.findOne({_id: req.params.post_id, user: req.user.id})
         if(!post) return res.status(400).send({ msg: "No post for specified user exists" })
@@ -85,7 +84,6 @@ router.put("/:post_id/like", [auth], async (req, res) => {
         let post = await Post.findOne({_id: req.params.post_id})
         if (!post) return res.status(400).json({ msg: "Post dont exist" })
         filteredUserLikes = await post.likes.filter((like) => like.user._id.toString() == req.user.id)
-        console.log(filteredUserLikes)
         if(filteredUserLikes.length !=0) return res.status(400).json({ msg: "You have already liked the post" })
         postUserLikeObject = {
             user: req.user.id,
