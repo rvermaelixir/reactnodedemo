@@ -4,9 +4,6 @@ import setAlert from "./alert";
 import setAuthToken from "../helpers/setAuthToken";
 
 export const loadUser = token => async dispatch => {
-    if (localStorage.token) {
-        setAuthToken(localStorage.token)
-    }
     try{
         const user = await api.get('/auth')
         dispatch({type: USER_LOADED, payload: user.data})
@@ -27,7 +24,7 @@ export const login = ({email, password}) => async dispatch => {
         setAuthToken(res.data.token)
         const user = await api.get('/auth')
         const payload = {
-            ...user.data,
+            user: user.data,
             token: res.data.token
         }
         dispatch(setAlert("User Loging Successfull", 'success'))
@@ -53,8 +50,10 @@ export const register = ({name, email, phone, password}) => async dispatch => {
     try {
         const body = JSON.stringify(newUser)
         const res = await api.post('users', body, config)
+        setAuthToken(res.data.token)
+        const user = await api.get('/auth')
         dispatch(setAlert("User Registered", 'success'))
-        dispatch({type: REGISTER_SUCCESS, payload: res.data})
+        dispatch({type: REGISTER_SUCCESS, payload: {user: user.data, token:res.data.token}})
     } catch (err){
         const errors =  err.response.data.error
         

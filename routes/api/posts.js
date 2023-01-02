@@ -28,9 +28,9 @@ async (req, res) => {
         }
 
         const post = new Post(postRequest)
-        await post.save()
-
-        res.send(post)
+        const savedPost = await post.save()
+        const populatedPost = await savedPost.populate('user', ['_id', 'name', 'avatar'])
+        res.send(populatedPost)
     } catch (err) {
         res.status(500).json({ msg: err.message })
     }
@@ -69,7 +69,7 @@ router.delete("/:post_id", auth, async (req, res) => {
 // @access "public"
 router.get("/", async(req, res) => {
     try {
-        const posts = await Post.find().populate("user", ["_id", "name", "avatar"])
+        const posts = await Post.find().sort({date: "desc"}).populate("user", ["_id", "name", "avatar"])
         res.json(posts)
     } catch (err) {
         res.status(500).json({ err: err.message })

@@ -40,16 +40,16 @@ const AddEducation = ({addEducation}) => {
     }
     return (
         <Fragment>
-            <h1 class="large text-primary">
+            <h1 className="large text-primary">
                 Add Your Education
             </h1>
-            <p class="lead">
-                <i class="fas fa-graduation-cap"></i> Add any school, bootcamp, etc that
+            <p className="lead">
+                <i className="fas fa-graduation-cap"></i> Add any school, bootcamp, etc that
                 you have attended
             </p>
             <small>* = required field</small>
-            <form class="form" onSubmit={(e) => onSubmit(e)}>
-                <div class="form-group">
+            <form className="form" onSubmit={(e) => onSubmit(e)}>
+                <div className="form-group">
                 <input
                     type="text"
                     placeholder="* School or Bootcamp"
@@ -59,7 +59,7 @@ const AddEducation = ({addEducation}) => {
                     required
                 />
                 </div>
-                <div class="form-group">
+                <div className="form-group">
                 <input
                     type="text"
                     placeholder="* Degree or Certificate"
@@ -69,26 +69,26 @@ const AddEducation = ({addEducation}) => {
                     onChange = {(e) => onChange(e)}
                 />
                 </div>
-                <div class="form-group">
+                <div className="form-group">
                 <input type="text" placeholder="Field Of Study" name="fieldofstudy" value = {fieldofstudy}
                     onChange = {(e) => onChange(e)}/>
                 </div>
-                <div class="form-group">
+                <div className="form-group">
                 <h4>From Date</h4>
                 <input type="date" name="from" value = {from}
                     onChange = {(e) => onChange(e)}/>
                 </div>
-                <div class="form-group">
+                <div className="form-group">
                 <p>
                     <input type="checkbox" name="current" value={current} 
                     onChange = {(e) => onCheckboxChange(e)}  /> Current School or Bootcamp
                 </p>
                 </div>
-                <div class="form-group">
+                <div className="form-group">
                 <h4>To Date</h4>
                 <input type="date" name="to" value={to} onChange = {(e) => onChange(e)}/>
                 </div>
-                <div class="form-group">
+                <div className="form-group">
                 <textarea
                     name="description"
                     cols="30"
@@ -98,8 +98,8 @@ const AddEducation = ({addEducation}) => {
                     onChange = {(e) => onChange(e)}
                 ></textarea>
                 </div>
-                <input type="submit" class="btn btn-primary my-1" />
-                <a class="btn btn-light my-1" href="dashboard.html">Go Back</a>
+                <input type="submit" className="btn btn-primary my-1" />
+                <a className="btn btn-light my-1" href="dashboard.html">Go Back</a>
             </form>
         </Fragment>
     )

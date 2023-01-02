@@ -1,0 +1,6 @@
+{
+    "mongoURI": "mongodb+srv://vermaravi005:<password>@petguest.twxb7tv.mongodb.net/?retryWrites=true&w=majority",
+    "jwtSecret": "petstaysecret",
+    "githubClientId": "1cff0fe928a04524ec63",
+    "githubClientSecret": "717f43ed856744941fe62b38d78bc52242af087f" 
+}

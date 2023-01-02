@@ -18,7 +18,8 @@ import AddExperience from './components/profile-form/AddExperience';
 import AddEducation from './components/profile-form/AddEducation';
 import Profiles from './components/profiles/Profiles';
 import Profile from './components/profile/Profile'
-import Post from './components/posts/Index';
+import Post from './components/posts/Post';
+import PostDetail from './components/posts/PostDetail';
 
 if(localStorage.token){
   setAuthToken(localStorage.token)
@@ -33,10 +34,12 @@ const App = () => {
     <Provider store={store}>
       <Router>
           <Navbar/>
+          <Routes>
+            <Route exact path="/" element={<Landing />}/>
+          </Routes>
           <section className="container">
             <Alert/>
             <Routes>
-              <Route exact path="/" element={<Landing />}/>
               <Route exact path="/login" element={<Login />}/>
               <Route exact path="/register" element={<Register />}/>
               <Route exact path="/profiles" element={<Profiles />}/>
@@ -46,8 +49,11 @@ const App = () => {
               <Route exact path="/add-experience" element={<PrivateRoute><AddExperience /></PrivateRoute>} />
               <Route exact path="/add-education" element={<PrivateRoute><AddEducation /></PrivateRoute>} />
               <Route exact path="/posts" element={<PrivateRoute><Post /></PrivateRoute>} />
+              <Route exact path="/post/:id" element={<PrivateRoute><PostDetail /></PrivateRoute>} />
             </Routes>
+           
           </section>
+          
       </Router>
     </Provider>
   )

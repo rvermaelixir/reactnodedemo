@@ -17,8 +17,7 @@ const auth = (state = initialState, action) => {
                 ...state,
                 ...payload,
                 isAuthenticated: true,
-                isLoading: false,
-                token: payload.token
+                isLoading: false
             }
         case AUTH_ERROR: 
         case LOGOUT:
@@ -34,7 +33,7 @@ const auth = (state = initialState, action) => {
         case  USER_LOADED: 
             return {
                 ...state,
-                ...payload,
+                user: payload,
                 isAuthenticated: true,
                 isLoading: false
             }

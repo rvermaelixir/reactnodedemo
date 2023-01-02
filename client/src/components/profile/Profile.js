@@ -7,7 +7,7 @@ import ProfileSocialLinks from "./ProfileSocialLinks"
 import ProfileEducation from "./ProfileEducation"
 import ProfileExperience from "./ProfileExperience"
 import ProfileGitHubRepos from "./ProfileGitHubRepos"
-const Profile = ({profile: mainProfile, repos, getProfileById}) => {
+const Profile = ({profile: mainProfile, getProfileById}) => {
     
    const params = useParams()
    

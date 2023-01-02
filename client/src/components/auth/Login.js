@@ -3,7 +3,7 @@ import { Link, Navigate } from "react-router-dom";
 import { login } from "../../actions/auth";
 import { connect } from "react-redux";
 import PropTypes from 'prop-types'
-const Login = ({login, isAuthenticated}) => {
+const Login = ({login, isAuthenticated, children}) => {
     const [formData, setFormData] = useState({
         email: "",
         password: ""
@@ -19,7 +19,9 @@ const Login = ({login, isAuthenticated}) => {
     }
 
     if(isAuthenticated){
-        return (<Navigate to="/dashboard" />);
+        console.log(children)
+        return (children)? children: (<Navigate to="/dashboard" />);
+        
     }
     return(
         <Fragment>
